@@ -13,6 +13,15 @@ class MessagesController {
       response.status(400).json({ message: error.message });
     }
   }
+
+  async showByUser(request: Request, response: Response) {
+    const { user_id } = request.params;
+
+    const messagesServices = new MessagesService();
+    const list = await messagesServices.listByUser(user_id);
+
+    return response.json(list);
+  }
 }
 
 export { MessagesController }
